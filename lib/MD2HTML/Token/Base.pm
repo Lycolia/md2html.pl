@@ -7,7 +7,7 @@ use strict;
 # text: 表示する文字列
 #
 sub new {
-  my ($class, $type, $text, $tokens) = @_;
+  my ($class, $type, $text) = @_;
   my $self = bless({
     type => $type,
     text => $text

@@ -1,10 +1,7 @@
 use strict;
 use lib './lib';
-
-# qwを書くとexportされたモジュール名を省略できる
-use MD2HTML::Util qw(remove_indent);
 use MD2HTML::Token::Codefence;
-
+use MD2HTML::Tokenizer::Codefence;
 
 my $text = <<EOF;
 qawsedrftgyhujikolp
@@ -24,39 +21,23 @@ EOF
 
 my @lines = split(/\n/, $text);
 
-my $begin_tag = 0;
-my $indent_len = 0;
-my $bquote_len = 0;
+my @tokens = [];
 
-my $result_type = 'codefence';
-my $result_text = '';
-my $result_lang = '';
+my $token = {};
 
 foreach my $line (@lines){
-  if ($line =~ /^(?<indent> *)(?<bquote>````*)(?<lang>[a-z]*)$/ && !$begin_tag) {
-    # codefence開始行の検出
-    $indent_len = length $+{indent};
-    $bquote_len = length $+{bquote};
-    $result_lang = $+{lang};
-    $begin_tag = 1;
-  } elsif ($line =~ /^(?<indent> *)(?<bquote>````*)$/ && $begin_tag) {
-    my $indent_len2 = length $+{indent};
-    my $bquote_len2 = length $+{bquote};
-    if ($bquote_len == $bquote_len2) {
-      # codefence終端行
-      last;
-    } else {
-      # 終端行ではないがバッククォートが3つ以上ある行
-      $result_text .= remove_indent($line, $indent_len);
-    }
-  } elsif ($begin_tag) {
-    $result_text .= remove_indent($line, $indent_len);
-  } else {
-    # 開始タグより前なので何もしない
-  }
+  # begin=1ならtypeのブロックへ入る
+  # begin=0ならブロックのtokinize関数全部に出入りする（どこかで1になる
+  # tokinize関数は第二引数の参照を操作する
+  # token変数の中身はbegin, type, textのみ共通で後はtypeによって変わる
+  ## これTokenクラスでよいのでは
+  ## token変数は各tokinizeの中で新規生成され、結果配列に設定される
+  ## 参照はHTMLになった時に消え、それまでメモリ上に保持する（undefしないこと）
+  MD2HTML::Tokenizer::Codefence->tokenize($line, $token);
+  push(@tokens, $token);
 }
 
-$result_text =~ s/\n$//;
-my $token = MD2HTML::Token::Codefence->new($result_type, $result_text, $result_lang);
+
+#$result_text =~ s/\n$//;
 
 print "TYPE: $token->{type}\n<===============>\nTEXT: $token->{text}\n<===============>\nLANG: $token->{lang}\n<===============>\n";

@@ -11,15 +11,17 @@ use MD2HTML::Token::Fence;
 my $head_regex = "^(?<indent> *)(?<bquote>````*)(?<lang>[a-z]*)\$";
 
 sub is {
-  my $self = shift;
+  # 第一引数はパッケージ名のフルパスなので捨てる
+  shift;
   my $text = shift;
   
   return $text =~ /$head_regex/;
 }
 
 sub tokenize {
-  # 第一引数はパッケージ名のフルパス
-  my ($pkg, $line, $token) = @_;
+  shift;
+  my $line = shift;
+  my $token = shift;
 
   if ($line =~ /$head_regex/ && !$token->{opened}) {
     $token->{lang} = $+{lang};
@@ -28,7 +30,7 @@ sub tokenize {
   } elsif ($line =~ /^ *(?<bquote>````*)$/ && $token->{opened}) {
     my $bquote_len = length $+{bquote};
     if ($token->{bquote_len} == $bquote_len) {
-      # Fence終端行
+      # 終端行
       $token->{closed} = 1;
       return $token;
     } else {

@@ -29,10 +29,12 @@ sub parse {
 
     # 構文処理
     if ($mode eq 'fence') {
-      print "fence\n";
+      MD2HTML::Tokenizer::Fence->tokenize($line, $token);
     }
   #  push(@tokens, $token);
   }
+
+  print $token->{text};
 }
 
 1;

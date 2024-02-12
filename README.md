@@ -1,6 +1,6 @@
 # md2html.pl
 
-Markdown to HTML
+Markdown to HTML for adiary
 
 ## memo
 

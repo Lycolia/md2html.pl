@@ -6,8 +6,8 @@ use utf8;
 # モジュールをexportするおまじない
 BEGIN{
     use Exporter;
-    my @ISA = qw(Exporter);
-    my @EXPORT_OK = qw(remove_indent);
+    our @ISA = qw(Exporter);
+    our @EXPORT_OK = qw(remove_indent);
 }
 
 sub remove_indent {

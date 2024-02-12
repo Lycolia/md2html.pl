@@ -19,8 +19,8 @@ sub parse {
 
   foreach my $line (@lines){
     
-    # 構文判定
     if (!$is_open) {
+      # 構文判定
       if (MD2HTML::Tokenizer::Fence->is($line)) {
         $is_open = 1;
         $token = MD2HTML::Token::Fence->new;

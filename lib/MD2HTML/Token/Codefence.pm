@@ -1,7 +1,7 @@
 package MD2HTML::Token::Codefence;
 
 use strict;
-use parent 'MD2HTML::Token::Base::SingleToken';
+use parent 'MD2HTML::Token::Base';
 
 sub new {
   my ($class, $lang, $indent_len, $bquote_len) = @_;

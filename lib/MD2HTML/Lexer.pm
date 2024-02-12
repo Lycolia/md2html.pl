@@ -16,19 +16,17 @@ sub parse {
   my $token = undef;
 
   my $is_open = 0;
-  my $mode = '';
 
   foreach my $line (@lines){
     
     # 構文判定
     if (!$is_open && MD2HTML::Tokenizer::Fence->is($line)) {
       $is_open = 1;
-      $mode = 'fence';
       $token = MD2HTML::Token::Fence->new;
     }
 
     # 構文処理
-    if ($mode eq 'fence') {
+    if (ref $token eq 'MD2HTML::Token::Fence') {
       MD2HTML::Tokenizer::Fence->tokenize($line, $token);
     }
   #  push(@tokens, $token);

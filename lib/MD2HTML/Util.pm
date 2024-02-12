@@ -1,4 +1,7 @@
 package MD2HTML::Util;
+use strict;
+use warnings;
+use utf8;
 
 # モジュールをexportするおまじない
 BEGIN{

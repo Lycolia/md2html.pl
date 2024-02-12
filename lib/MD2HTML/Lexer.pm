@@ -1,26 +1,35 @@
 package MD2HTML::Lexer;
 
 use strict;
+use warnings;
+use utf8;
 
-sub parse {
-  my $text = shift;
-  my $option = shift;
+my @lines = split(/\n/, $text);
 
-  my $token_list = [];
+my @tokens = [];
 
-  my $opend = 0;
-  my $escaped = 0;
-  my $type = '';
+my $token = undef;
 
-  my @lines = split(/\n/, $text);
-  undef $text;
+my $is_open = 0;
+my $mode = '';
+
+
+foreach my $line (@lines){
   
-  foreach my $line (@lines) {
-    if ($line =~ /```/) {
-      $opend = 1;
-      $type = 'codefence';
-    }
+  # 構文判定
+  if (!$is_open && MD2HTML::Tokenizer::Fence->is($line)) {
+    print $line."\n";
+    $is_open = 1;
+    $mode = 'fence';
+    $token = MD2HTML::Token::Fence->new;
+    $token->{opened} = 1;
   }
+
+  # 構文処理
+  if ($mode == 'fence') {
+
+  }
+#  push(@tokens, $token);
 }
 
 1;

@@ -12,7 +12,7 @@ sub new {
   my ($class, $type, $text) = @_;
   my $self = bless({
     type => $type,
-    opened => 0,
+    opened => 1,
     closed => 0,
     text => $text
   }, $class);

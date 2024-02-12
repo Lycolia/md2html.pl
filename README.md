@@ -1,4 +1,4 @@
-# md2html.pl
+# md2html4adiary.pm
 
 Markdown to HTML for adiary
 

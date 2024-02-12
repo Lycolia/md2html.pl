@@ -8,7 +8,7 @@ use MD2HTML::Util qw(remove_indent);
 use MD2HTML::Token::Fence;
 
 # 正規表現を変数化する場合、//は含められず、使うときに正規表現として展開するので、/$var/形式にする必要がある
-my $head_regex = "^(?<indent> *)(?<bquote>````*)(?<lang>[a-z]*)\$";
+my $head_regex = '^(?<indent> *)(?<bquote>````*)(?<lang>[a-z]*)$';
 
 sub is {
   # 第一引数はパッケージ名のフルパスなので捨てる

@@ -21,12 +21,9 @@ sub tokenize {
   my ($pkg, $line, $token) = @_;
 
   if ($line =~ /$head_regex/ && !$token->{opened}) {
-    $token = MD2HTML::Token::Fence->new(
-      $+{lang},
-      length $+{indent},
-      length $+{bquote},
-      ''
-    );
+    $token->{lang} = $+{lang};
+    $token->{indent_len} = length $+{indent};
+    $token->{bquote_len} = length $+{bquote};
   } elsif ($line =~ /^ *(?<bquote>````*)$/ && $token->{opened}) {
     my $bquote_len = length $+{bquote};
     if ($token->{bquote_len} == $bquote_len) {

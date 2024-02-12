@@ -13,12 +13,10 @@ sub parse {
   my @lines = split(/\n/, $text);
 
   my @tokens = [];
-
   my $token = undef;
 
   my $is_open = 0;
   my $mode = '';
-
 
   foreach my $line (@lines){
     

@@ -1,7 +1,9 @@
 use strict;
+use warnings;
+use utf8;
 use lib './lib';
-use MD2HTML::Token::Codefence;
-use MD2HTML::Tokenizer::Codefence;
+use MD2HTML::Token::Fence;
+use MD2HTML::Tokenizer::Fence;
 
 my $text = <<EOF;
 qawsedrftgyhujikolp
@@ -23,21 +25,28 @@ my @lines = split(/\n/, $text);
 
 my @tokens = [];
 
-my $token = {};
+my $token = undef;
+
+my $is_open = 0;
+my $mode = '';
+
 
 foreach my $line (@lines){
-  # begin=1ならtypeのブロックへ入る
-  # begin=0ならブロックのtokinize関数全部に出入りする（どこかで1になる
-  # tokinize関数は第二引数の参照を操作する
-  # token変数の中身はbegin, type, textのみ共通で後はtypeによって変わる
-  ## これTokenクラスでよいのでは
-  ## token変数は各tokinizeの中で新規生成され、結果配列に設定される
-  ## 参照はHTMLになった時に消え、それまでメモリ上に保持する（undefしないこと）
-  MD2HTML::Tokenizer::Codefence->tokenize($line, $token);
-  push(@tokens, $token);
+  
+  # 構文判定
+  if (!$is_open && MD2HTML::Tokenizer::Fence->is($line)) {
+    print $line."\n";
+    $is_open = 1;
+    $mode = 'fence';
+    $token = MD2HTML::Token::Fence->new;
+    $token->{opened} = 1;
+  }
+
+  # 構文処理
+  if ($mode == 'fence') {
+
+  }
+#  push(@tokens, $token);
 }
 
 
-#$result_text =~ s/\n$//;
-
-print "TYPE: $token->{type}\n<===============>\nTEXT: $token->{text}\n<===============>\nLANG: $token->{lang}\n<===============>\n";

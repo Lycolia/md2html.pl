@@ -1,9 +1,11 @@
 package MD2HTML::Tokenizer::Base;
 
 use strict;
+use warnings;
+use utf8;
 
 #
-# type: codefence, code, heading, bullet_list, ordered_list, paragraph, html, comment, horizontal_line, table, blockquote, bold, italic, underscore, strike
+# type: fence, code, heading, bullet_list, ordered_list, paragraph, html, comment, horizontal_line, table, blockquote, bold, italic, underscore, strike
 # text: 表示する文字列
 #
 sub new {

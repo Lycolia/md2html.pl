@@ -10,32 +10,32 @@ sub new {
   my ($class, $type, $text) = @_;
   my $self = bless({
     type => $type,
-    _begin => 0,
-    _end => 0,
+    _open => 0,
+    _close => 0,
     text => $text
   }, $class);
 }
 
 # 処理開始
-sub begin_proc {
+sub open_proc {
   my $self = shift;
-  $self->{_begin} = 1;
+  $self->{_open} = 1;
 }
 
 # 処理終了
-sub end_proc {
+sub close_proc {
   my $self = shift;
-  $self->{_end} = 1;
+  $self->{_close} = 1;
 }
 
-sub is_begin {
+sub is_open {
   my $self = shift;
-  return $self->{_begin};
+  return $self->{_open};
 }
 
-sub is_end {
+sub is_close {
   my $self = shift;
-  return $self->{_end};
+  return $self->{_close};
 }
 
 1;

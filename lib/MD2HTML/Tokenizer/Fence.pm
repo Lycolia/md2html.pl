@@ -32,17 +32,14 @@ sub tokenize {
     if ($token->{bquote_len} == $bquote_len) {
       # 終端行
       $token->{closed} = 1;
-      return $token;
     } else {
       # 終端行ではないがバッククォートが3つ以上ある行
       $token->{text} .= remove_indent($line, $token->{indent_len});
-      return $token;
     }
   } elsif ($token->{opened}) {
     $token->{text} .= remove_indent($line, $token->{indent_len});
-    return $token;
   } else {
-    return $token;
+    # 何もしない
   }
 }
 

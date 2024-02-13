@@ -7,7 +7,7 @@ use parent 'MD2HTML::Token::Base';
 
 sub new {
   my $class = shift;
-  my $self = $class->SUPER::new('fence', '');
+  my $self = $class->SUPER::new(shift);
   
   $self->{lang} = '';
   $self->{indent_len} = 0;

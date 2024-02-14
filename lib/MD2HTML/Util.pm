@@ -12,11 +12,16 @@ BEGIN{
 }
 
 sub trim_indent {
+  shift;
   my $line = shift;
   my $indent_len = shift;
 
   $line =~ s/^ {$indent_len}//;
-  return "$line\n";
+  return "$line";
+}
+
+sub compare {
+  return 1;
 }
 
 1;

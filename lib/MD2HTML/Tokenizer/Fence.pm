@@ -23,12 +23,14 @@ sub tokenize {
   my $line = shift;
   my $token = shift;
 
-  if ($line =~ /$head_regex/ && !$token->{opened}) {
+  if (!$token->{opened} && $line =~ /$head_regex/) {
+    $token->{opened} = 1;
     $token->{lang} = $+{lang};
     $token->{indent_len} = length $+{indent};
     $token->{bquote_len} = length $+{bquote};
   } elsif ($line =~ /^ *(?<bquote>````*)$/ && $token->{opened}) {
     my $bquote_len = length $+{bquote};
+
     if ($token->{bquote_len} == $bquote_len) {
       # 終端行
       $token->{closed} = 1;

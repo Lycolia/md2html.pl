@@ -30,6 +30,11 @@ sub parse {
     if ($is_open) {
       if ((ref $token) eq 'MD2HTML::Token::Fence') {
         MD2HTML::Tokenizer::Fence->tokenize($line, $token);
+
+        if ($token->{closed}) {
+          $is_open = 0;
+          print 'CLOSED';
+        }
       }
     }
   #  push(@tokens, $token);

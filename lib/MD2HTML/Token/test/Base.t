@@ -11,7 +11,7 @@ subtest 'MD2HTML::Token::Base, コンストラクタに正しい値がセット�
     my $actual = MD2HTML::Token::Base->new('piyo');
 
     is $actual->{text}, 'piyo';
-    is $actual->{opened}, 1;
+    is $actual->{opened}, 0;
     is $actual->{closed}, 0;
     is $actual->{children}, undef;
 };

@@ -8,7 +8,7 @@ sub new {
   my ($class, $text) = @_;
   my $self = bless({
     text => $text,
-    opened => 1,
+    opened => 0,
     closed => 0,
     children => undef
   }, $class);

@@ -11,7 +11,7 @@ subtest 'MD2HTML::Token::Fence, コンストラクタに正しい値がセット
     my $actual = MD2HTML::Token::Fence->new;
 
     is $actual->{text}, undef;
-    is $actual->{opened}, 1;
+    is $actual->{opened}, 0;
     is $actual->{closed}, 0;
     is $actual->{children}, undef;
 

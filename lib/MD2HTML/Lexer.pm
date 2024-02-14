@@ -18,24 +18,22 @@ sub parse {
   my $is_open = 0;
 
   foreach my $line (@lines){
-    
+    # 構文判定
     if (!$is_open) {
-      # 構文判定
       if (MD2HTML::Tokenizer::Fence->is($line)) {
         $is_open = 1;
         $token = MD2HTML::Token::Fence->new;
       }
-    } else {
-      # 構文処理
-      if (ref $token eq 'MD2HTML::Token::Fence') {
+    }
+
+    # 構文処理
+    if ($is_open) {
+      if ((ref $token) eq 'MD2HTML::Token::Fence') {
         MD2HTML::Tokenizer::Fence->tokenize($line, $token);
       }
     }
-
   #  push(@tokens, $token);
   }
-
-  print $token->{text};
 }
 
 1;

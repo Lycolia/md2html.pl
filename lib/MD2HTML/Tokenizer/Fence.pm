@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use utf8;
 # qwを書くとexportされたモジュール名を省略できる
-use MD2HTML::Util qw(remove_indent);
+use MD2HTML::Util qw(trim_indent);
 use MD2HTML::Token::Fence;
 
 # 正規表現を変数化する場合、//は含められず、使うときに正規表現として展開するので、/$var/形式にする必要がある
@@ -36,10 +36,10 @@ sub tokenize {
       $token->{closed} = 1;
     } else {
       # 終端行ではないがバッククォートが3つ以上ある行
-      $token->{text} .= remove_indent($line, $token->{indent_len});
+      $token->{text} .= trim_indent($line, $token->{indent_len});
     }
   } elsif ($token->{opened}) {
-    $token->{text} .= remove_indent($line, $token->{indent_len});
+    $token->{text} .= trim_indent($line, $token->{indent_len});
   } else {
     # 何もしない
   }

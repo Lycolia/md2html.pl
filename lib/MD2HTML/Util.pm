@@ -1,4 +1,5 @@
 package MD2HTML::Util;
+
 use strict;
 use warnings;
 use utf8;
@@ -7,10 +8,10 @@ use utf8;
 BEGIN{
     use Exporter;
     our @ISA = qw(Exporter);
-    our @EXPORT_OK = qw(remove_indent);
+    our @EXPORT_OK = qw(trim_indent);
 }
 
-sub remove_indent {
+sub trim_indent {
   my $line = shift;
   my $indent_len = shift;
 

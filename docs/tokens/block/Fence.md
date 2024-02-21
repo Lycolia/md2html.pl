@@ -42,7 +42,7 @@ print $hoge;
 
 **出力**
 
-````
+````html
 <p><pre><code class="language-plaintext">hoge
 piyo
 fuga</code></pre></p>

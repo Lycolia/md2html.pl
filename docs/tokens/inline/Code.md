@@ -14,6 +14,6 @@
 
 **出力**
 
-```
+```html
 <code>&amp;&lt;hoge&gt;</code>
 ```

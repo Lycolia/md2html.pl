@@ -14,6 +14,6 @@
 
 **出力**
 
-```
+```html
 <strong>hoge</strong>
 ```

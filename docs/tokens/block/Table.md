@@ -17,7 +17,7 @@
 
 **出力**
 
-```
+```html
 <table>
   <thead>
     <tr>

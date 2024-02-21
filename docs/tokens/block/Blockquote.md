@@ -21,7 +21,7 @@
 
 **出力**
 
-```
+```html
 <blockquote>
 hoge
 piyo
@@ -41,7 +41,7 @@ aaaa
 
 **出力**
 
-```
+```html
 <blockquote>
 hoge
 piyo

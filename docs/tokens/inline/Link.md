@@ -9,13 +9,11 @@
 **入力**
 
 ```
-[hoge](https://example.com)
-[![alt-text](https://example.com/1.jpg)](https://example.com)
+[hoge](https://example.com) [![alt-text](https://example.com/1.jpg)](https://example.com)
 ```
 
 **出力**
 
-```
-<a href="https://example.com">hoge</a>
-<a href="https://example.com">{Image}</a>
+```html
+<a href="https://example.com">hoge</a> <a href="https://example.com">{Image}</a>
 ```

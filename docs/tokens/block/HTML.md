@@ -23,7 +23,7 @@ foo<br />bar
 
 **出力**
 
-```
+```html
 <p><span>**ほげ**&amp;&lt;piyo&gt;</span></p>
 
 <p>foo<br />bar</p>
